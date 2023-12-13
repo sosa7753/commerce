@@ -60,7 +60,7 @@
 
 ## ERD 모델링
 
-![ERD 모델링](commerce-ERD.png)
+![ERD 모델링](../src/main/resources/image/commerce-ERD.png)
 
 
 ## 이후 추가해 볼 것
