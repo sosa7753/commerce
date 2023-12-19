@@ -62,6 +62,8 @@
 
 ![ERD 모델링](../src/main/resources/image/commerce-ERD.png)
 
+## Trouble Shooting
+[go to the trouble shooting section](../docs/TROUBLE_SHOOTING.md)
 
 ## 이후 추가해 볼 것
 
