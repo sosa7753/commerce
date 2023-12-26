@@ -36,26 +36,9 @@ public class Member implements UserDetails {
     private LocalDateTime created_date;
     private LocalDateTime updated_date;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "member_role",
-            joinColumns = @JoinColumn(name = "member_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-
-    private List<Role> roles = new ArrayList<>();
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-
-
-        // 역할 권한 추가
-        for(Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole_name()));
-        }
-
         // 사용자 계정 타입 추가
         authorities.add(new SimpleGrantedAuthority(this.userType.name()));
         return authorities;
