@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Slf4j
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
@@ -25,7 +24,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorize -> authorize
                         .requestMatchers(
-                                "/**/signup", "/**/signin", "error"
+                                "/**/signup", "/**/signin", "/error"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );
