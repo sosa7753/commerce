@@ -1,7 +1,6 @@
 package com.project.commerce.security;
 
 import com.project.commerce.domain.Member;
-import com.project.commerce.dto.SaveAuthority;
 import com.project.commerce.service.MemberService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -33,10 +32,6 @@ public class TokenProvider {
     public String generateToken(Member member) {
         Claims claims = Jwts.claims().setSubject(member.getUsername());
 
-        SaveAuthority saveAuthority = new SaveAuthority(member.getRoles());
-        List<String> roles = saveAuthority.getRoles();
-
-        claims.put("roles", roles); // 행동 권한
         claims.put("userType", member.getUserType()); // 계정 타입
 
         Date now = new Date();
@@ -83,7 +78,4 @@ public class TokenProvider {
             return e.getClaims();
         }
     }
-
-
-
 }
