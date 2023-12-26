@@ -6,9 +6,9 @@ import com.project.commerce.dto.AuthView;
 import com.project.commerce.exception.CommerceException;
 import com.project.commerce.repository.MemberRepository;
 import com.project.commerce.type.ErrorCode;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,14 +17,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
-@Builder
 @Service
-@AllArgsConstructor
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public MemberService(MemberRepository memberRepository,
+                         @Qualifier("passwordEncoder") PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+        this.memberRepository = memberRepository;
+    }
 
     // 계정 등록
     @Transactional
