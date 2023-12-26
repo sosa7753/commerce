@@ -8,14 +8,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class CommerceException extends RuntimeException {
     private ErrorCode errorCode;
-    private String errorMessage;
 
     public CommerceException(ErrorCode errorCode) {
+        super("Commerce Exception " + errorCode.getDescription());
         this.errorCode = errorCode;
-        this.errorMessage = errorCode.getDescription();
     }
 }
