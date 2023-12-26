@@ -1,14 +1,11 @@
 package com.project.commerce.dto;
 
 import com.project.commerce.domain.Member;
-import com.project.commerce.domain.Role;
-import com.project.commerce.type.Authority;
 import com.project.commerce.type.UserType;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @Builder
 public class AuthDto {
@@ -35,9 +32,6 @@ public class AuthDto {
                     .my_location(this.myLocation)
                     .created_date(LocalDateTime.now())
                     .updated_date(LocalDateTime.now())
-                    .roles(Arrays.asList(
-                            Role.builder().role_name(Authority.ROLE_WRITE.name()).build(),
-                            Role.builder().role_name(Authority.ROLE_READ.name()).build()))
                     .build();
         }
     }
