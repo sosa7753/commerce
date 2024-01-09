@@ -1,7 +1,6 @@
 package com.project.commerce.exception;
 
 import com.project.commerce.type.ErrorCode;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
