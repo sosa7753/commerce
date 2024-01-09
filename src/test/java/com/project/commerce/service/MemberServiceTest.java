@@ -6,7 +6,6 @@ import com.project.commerce.dto.AuthDto;
 import com.project.commerce.dto.AuthView;
 import com.project.commerce.exception.CommerceException;
 import com.project.commerce.repository.MemberRepository;
-import com.project.commerce.type.ErrorCode;
 import com.project.commerce.type.UserType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

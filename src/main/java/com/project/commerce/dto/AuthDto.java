@@ -5,8 +5,6 @@ import com.project.commerce.type.UserType;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Builder
 public class AuthDto {
 
@@ -29,9 +27,7 @@ public class AuthDto {
                     .username(this.username)
                     .password(this.password)
                     .userType(this.userType)
-                    .my_location(this.myLocation)
-                    .created_date(LocalDateTime.now())
-                    .updated_date(LocalDateTime.now())
+                    .myLocation(this.myLocation)
                     .build();
         }
     }

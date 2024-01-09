@@ -27,7 +27,7 @@ public class AuthController {
     public ResponseEntity<?> signup(@RequestBody AuthDto.SignUp request) {
 
         AuthView result = this.memberService.registerMember(request);
-        log.info("success registration : " + result.getUsername());
+        log.info("계정 등록 완료");
         return ResponseEntity.ok(result);
     }
 
@@ -35,8 +35,9 @@ public class AuthController {
     public ResponseEntity<?> signin(@RequestBody AuthDto.SignIn request) {
 
         Member member = this.memberService.logIn(request); // 비밀번호 검증
+        log.info("비밀번호 검증 완료");
         String token = this.tokenProvider.generateToken(member); // 토큰 생성
-        log.info("user login -> " + member.getUsername());
+        log.info("토큰 생성 완료");
 
         return ResponseEntity.ok(token);
     }

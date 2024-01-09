@@ -8,17 +8,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "member")
-public class Member implements UserDetails {
+public class Member extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,10 +31,11 @@ public class Member implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    private String my_location;
+    @Column(name = "my_location")
+    private String myLocation;
 
-    private LocalDateTime created_date;
-    private LocalDateTime updated_date;
+    @OneToMany(mappedBy = "member", cascade =  CascadeType.ALL)
+    @Builder.Default private List<Store> stores = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
