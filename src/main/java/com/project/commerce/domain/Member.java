@@ -34,6 +34,9 @@ public class Member extends BaseEntity implements UserDetails {
     @Column(name = "my_location")
     private String myLocation;
 
+    @OneToOne(mappedBy = "member")
+    @Builder.Default private Cart cart = Cart.builder().build();
+
     @OneToMany(mappedBy = "member", cascade =  CascadeType.ALL)
     @Builder.Default private List<Store> stores = new ArrayList<>();
 
