@@ -4,6 +4,9 @@ package com.project.commerce.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -27,4 +30,7 @@ public class Store extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "member_id")
     @Builder.Default private Member member = new Member();
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default private List<Product> products = new ArrayList<>();
 }
