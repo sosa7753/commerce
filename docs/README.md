@@ -54,7 +54,7 @@
 
 ## ERD 모델링
 
-![ERD 모델링](../src/main/resources/image/Commerce-ERD.png)
+![ERD 모델링](../Commerce-ERD.png)
 
 ## Trouble Shooting
 [go to the trouble shooting section](../docs/TROUBLE_SHOOTING.md)
