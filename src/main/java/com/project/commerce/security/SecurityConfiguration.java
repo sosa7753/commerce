@@ -23,13 +23,20 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers("/store/read", "/store/search")
-                                .hasAnyRole("USER, ADMIN")
-                                .requestMatchers("/store/register","/store/update","/store/delete")
-                                .hasRole("ADMIN")
                                 .requestMatchers(
-                                        "/**/signup", "/**/signin", "/error"
-                                ).permitAll()
+                                        "/store/read/**", "/store/search/**",
+                                        "/product/read/**/**","/product/search/**/**",
+                                        "/cart/read")
+                                .hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(
+                                        "/store/register","/store/update","/store/delete/**",
+                                        "/product/register/**", "/product/update/**","/product/delete/**/**")
+                                .hasRole("ADMIN")
+                                .requestMatchers("/cart/add", "/cart/update", "/cart/clear")
+                                .hasRole("USER")
+                                .requestMatchers(
+                                        "/**/signup", "/**/signin", "/error")
+                                .permitAll()
                                 .anyRequest().authenticated()
                 );
         http.addFilterBefore(this.jwtAuthenticationFilter,
