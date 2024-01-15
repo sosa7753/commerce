@@ -1,9 +1,11 @@
 package com.project.commerce.service;
 
+import com.project.commerce.domain.Cart;
 import com.project.commerce.domain.Member;
 import com.project.commerce.dto.AuthDto;
 import com.project.commerce.dto.AuthView;
 import com.project.commerce.exception.CommerceException;
+import com.project.commerce.repository.CartRepository;
 import com.project.commerce.repository.MemberRepository;
 import com.project.commerce.type.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +23,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository,
+    public MemberService(MemberRepository memberRepository, CartRepository cartRepository,
                          @Qualifier("passwordEncoder") PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
         this.memberRepository = memberRepository;
+        this.cartRepository = cartRepository;
     }
 
     // 계정 등록
@@ -42,7 +46,12 @@ public class MemberService implements UserDetailsService {
 
         request.setPassword(this.passwordEncoder.encode(request.getPassword()));
         Member createMember = request.authToEntity();
+        Cart cart = createMember.getCart();
+        cart.setCartName(createMember.getUsername());
+        cart.setMember(createMember);
+
         this.memberRepository.save(createMember);
+        this.cartRepository.save(cart);
 
         return new AuthView(createMember);
     }
