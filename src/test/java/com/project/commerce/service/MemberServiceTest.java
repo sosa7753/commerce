@@ -5,6 +5,7 @@ import com.project.commerce.domain.Member;
 import com.project.commerce.dto.AuthDto;
 import com.project.commerce.dto.AuthView;
 import com.project.commerce.exception.CommerceException;
+import com.project.commerce.repository.CartRepository;
 import com.project.commerce.repository.MemberRepository;
 import com.project.commerce.type.UserType;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,13 +33,16 @@ class MemberServiceTest {
     private MemberRepository memberRepository;
 
     @Mock
+    private CartRepository cartRepository;
+
+    @Mock
     private PasswordEncoder passwordEncoder;
 
     private MemberService memberService;
 
     @BeforeEach
     void setup() {
-        memberService = new MemberService(memberRepository, passwordEncoder);
+        memberService = new MemberService(memberRepository, cartRepository, passwordEncoder);
     }
 
     @Test
