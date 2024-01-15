@@ -10,6 +10,7 @@ public class AuthDto {
 
     @Data
     public static class SignIn {
+
         private String username;
         private String password;
     }
